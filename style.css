@@ -3,7 +3,7 @@
 body, html { 
     width: 100%; 
     height: 100%; 
-    height: 100dvh; /* Dynamic height fixes mobile browser cut-offs! */
+    height: 100dvh; 
     overflow: hidden; 
     background-color: #000; 
     touch-action: manipulation; 
@@ -47,7 +47,7 @@ body, html {
     flex-direction: column; 
     gap: 15px; 
     flex-wrap: wrap; 
-    height: calc(100% - 35px); /* Keeps icons from bleeding under the taskbar */
+    height: calc(100% - 35px); 
 }
 .icon { width: 70px; text-align: center; color: white; text-shadow: 1px 1px 2px black; cursor: pointer; }
 .icon-img { width: 32px; height: 32px; margin-bottom: 3px; }
@@ -56,7 +56,7 @@ body, html {
 
 /* XP Taskbar */
 #taskbar {
-    position: fixed; /* Anchors to the absolute bottom of visible screen */
+    position: fixed; 
     bottom: 0; 
     left: 0; 
     width: 100%; 
@@ -151,3 +151,4 @@ body, html {
 /* Screensaver */
 #screensaver { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 2000; overflow: hidden; }
 #bounce-logo { position: absolute; width: 80px; }
+
