@@ -1,7 +1,15 @@
 /* Reset and Mobile Base */
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tahoma', sans-serif; }
-body, html { width: 100vw; height: 100vh; overflow: hidden; background-color: #000; touch-action: manipulation; }
+body, html { 
+    width: 100%; 
+    height: 100%; 
+    height: 100dvh; /* Dynamic height fixes mobile browser cut-offs! */
+    overflow: hidden; 
+    background-color: #000; 
+    touch-action: manipulation; 
+}
 .hidden { display: none !important; }
+
 
 /* Windows XP Login Screen */
 #login-screen {
@@ -34,7 +42,7 @@ body, html { width: 100vw; height: 100vh; overflow: hidden; background-color: #0
 }
 
 /* Desktop Icons */
-.desktop-icons-container { padding: 10px; display: flex; flex-direction: column; gap: 15px; flex-wrap: wrap; height: 90%; }
+.desktop-icons-container { padding: 10px; display: flex; flex-direction: column; gap: 15px; flex-wrap: wrap; height: calc(100% - 35px); }
 .icon { width: 70px; text-align: center; color: white; text-shadow: 1px 1px 2px black; cursor: pointer; }
 .icon-img { width: 32px; height: 32px; margin-bottom: 3px; }
 .icon span { font-size: 11px; background: transparent; padding: 2px; border-radius: 3px; display: inline-block; line-height: 1.2; }
@@ -42,9 +50,14 @@ body, html { width: 100vw; height: 100vh; overflow: hidden; background-color: #0
 
 /* XP Taskbar */
 #taskbar {
-    position: absolute; bottom: 0; left: 0; width: 100%; height: 35px;
+    position: fixed; /* Changed from absolute to fixed */
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 35px;
     background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #245edb 92%, #333 100%);
-    display: flex; justify-content: space-between; align-items: center; z-index: 500;
+    display: flex; justify-content: space-between; align-items: center; 
+    z-index: 9000; /* Super high so windows slide behind it */
 }
 #start-btn {
     height: 100%; display: flex; align-items: center; padding: 0 15px 0 10px; color: white; 
@@ -61,8 +74,13 @@ body, html { width: 100vw; height: 100vh; overflow: hidden; background-color: #0
 
 /* XP Start Menu */
 #start-menu {
-    position: absolute; bottom: 35px; left: 0; width: 250px; background: white;
-    border-top-right-radius: 5px; border: 1px solid #245edb; display: flex; flex-direction: column; z-index: 501;
+    position: fixed; /* Anchors firmly above the fixed taskbar */
+    bottom: 35px; 
+    left: 0; 
+    width: 250px; 
+    background: white;
+    border-top-right-radius: 5px; border: 1px solid #245edb; display: flex; flex-direction: column; 
+    z-index: 9001; /* Sits right above the taskbar */
     box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
 .start-header {
