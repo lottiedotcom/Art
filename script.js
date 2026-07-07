@@ -1,10 +1,24 @@
-// --- CONFIGURATION --
+// --- CONFIGURATION ---
 const CORRECT_PASSWORD = "dream"; 
 const PASSWORD_HINT = "psst... the password is 'dream'";
 
-// URLs of your 50 art pieces
-const galleryImages = [
-    // "image1.jpg", "image2.jpg", etc... Add your 50 pieces here
+// --- ARTWORK DATA ---
+// Add all 50 pieces here! Make sure to put your high-quality .jpg names in the src.
+const galleryData = [
+    {
+        src: "1.jpg", 
+        title: "soul",
+        description: "em",
+        kofiLink: "YOUR_KOFI_LINK_HERE"
+    },
+    {
+        src: "circle_02.jpg", 
+        title: "Circle 02",
+        description: "A continuation of the series. I really love the colors in this one.",
+        kofiLink: "YOUR_KOFI_LINK_HERE"
+    },
+    
+    // Just copy and paste that block format above for all 50 pieces!
 ];
 
 // Liminal Error Messages
@@ -20,17 +34,13 @@ const liminalMessages = [
 // --- SOUND EFFECT LOGIC ---
 const clickAudio = document.getElementById('ui-click-sound');
 
-// Play sound function
 function playClickSound() {
     if (clickAudio) {
-        clickAudio.currentTime = 0; // Reset sound to start so rapid clicks overlap correctly
-        clickAudio.play().catch(e => {
-            // Browsers sometimes block audio before a user interacts with the page, this catches the silent error
-        });
+        clickAudio.currentTime = 0; 
+        clickAudio.play().catch(e => { });
     }
 }
 
-// Global listener: If you click an icon, button, link, start menu, or gallery image, it plays the sound
 document.addEventListener('click', (e) => {
     const isClickable = e.target.closest('.icon, button, a, #start-btn, #clock, #user-avatar, .gallery-item');
     if (isClickable) {
@@ -38,16 +48,13 @@ document.addEventListener('click', (e) => {
     }
 });
 
-
 // --- LOGIN LOGIC ---
 const avatarBtn = document.getElementById('user-avatar');
 const passInput = document.getElementById('password-input');
 const loginBtn = document.getElementById('login-btn');
 
-// Click icon for password hint
 avatarBtn.addEventListener('click', () => alert(PASSWORD_HINT));
 
-// Verify password
 loginBtn.addEventListener('click', () => {
     if(passInput.value.toLowerCase() === CORRECT_PASSWORD) {
         document.getElementById('login-screen').classList.add('hidden');
@@ -64,11 +71,9 @@ let clickCount = 0;
 let clickTimer = null;
 
 function openWindow(id) {
-    // Bring window to front
     const win = document.getElementById(id);
     win.classList.remove('hidden');
     
-    // Simple z-index bump to make clicked windows appear on top
     const allWindows = document.querySelectorAll('.window');
     allWindows.forEach(w => w.style.zIndex = 100);
     win.style.zIndex = 101;
@@ -99,7 +104,7 @@ function triggerLiminalError() {
     
     errorTxt.innerText = randomMsg;
     errorWin.classList.remove('hidden');
-    errorWin.style.zIndex = 999; // Ensure error is always on top
+    errorWin.style.zIndex = 999; 
 }
 
 // --- START MENU ---
@@ -108,7 +113,6 @@ document.getElementById('start-btn').addEventListener('click', () => {
     menu.classList.toggle('hidden');
 });
 
-// Hide start menu if clicking elsewhere
 document.addEventListener('click', (e) => {
     if (!e.target.closest('#start-btn') && !e.target.closest('#start-menu')) {
         document.getElementById('start-menu').classList.add('hidden');
@@ -118,9 +122,8 @@ document.addEventListener('click', (e) => {
 // --- GLITCHING CLOCK & SECRET CLICK LOGIC ---
 const clock = document.getElementById('clock');
 const glitchTimes = ["00:00 AM", "3:33 AM", "10:21 AM"];
-let isGlitching = false; // Tracks if the clock is currently in a glitch state
+let isGlitching = false; 
 
-// Only open the hidden window if they click while isGlitching is true
 clock.addEventListener('click', () => {
     if (isGlitching) {
         openWindow('window-hidden');
@@ -139,15 +142,13 @@ function updateClock() {
 }
 
 setInterval(() => {
-    // 10% chance roughly once every 5-10 seconds
     if(Math.random() < 0.1) {
-        isGlitching = true; // The window of opportunity opens
+        isGlitching = true; 
         const randomGlitch = glitchTimes[Math.floor(Math.random() * glitchTimes.length)];
         clock.innerText = randomGlitch;
         
-        // Glitch lasts exactly 1 second before snapping back
         setTimeout(() => {
-            isGlitching = false; // The window closes
+            isGlitching = false; 
             clock.innerText = updateClock();
         }, 1000);
     } else {
@@ -159,19 +160,43 @@ setInterval(() => {
 
 // --- POPULATE THE MESSY GALLERY ---
 const grid = document.getElementById('gallery-grid');
+
 for(let i = 0; i < 50; i++) {
+    let data = galleryData[i] || {}; 
+    
     let img = document.createElement('img');
-    img.src = galleryImages[i] || 'https://via.placeholder.com/70/ccc/999?text=Art'; // fallback
+    img.src = data.src || 'https://via.placeholder.com/70/ccc/999?text=Art'; 
     img.className = 'gallery-item';
     
-    // Random rotation for the messy look
     let randomRot = Math.floor(Math.random() * 30) - 15; 
     img.style.transform = `rotate(${randomRot}deg)`;
     
     img.onclick = () => {
         document.getElementById('viewer-img').src = img.src;
+        
+        const detailsContainer = document.getElementById('viewer-details');
+        const titleEl = document.getElementById('viewer-title');
+        const descEl = document.getElementById('viewer-desc');
+        const kofiEl = document.getElementById('viewer-kofi');
+        
+        if (data.description || data.kofiLink || data.title) {
+            detailsContainer.classList.remove('hidden');
+            titleEl.innerText = data.title || "Unknown Art";
+            descEl.innerText = data.description || "";
+            
+            if(data.kofiLink) {
+                kofiEl.href = data.kofiLink;
+                kofiEl.classList.remove('hidden');
+            } else {
+                kofiEl.classList.add('hidden');
+            }
+        } else {
+            detailsContainer.classList.add('hidden');
+        }
+
         openWindow('photo-viewer');
     };
+    
     grid.appendChild(img);
 }
 
@@ -188,7 +213,6 @@ function resetScreensaver() {
     screensaver.classList.add('hidden');
     cancelAnimationFrame(animationFrame);
     
-    // 10 seconds of inactivity
     screensaverTimeout = setTimeout(showScreensaver, 10000); 
 }
 
@@ -208,7 +232,7 @@ function animateLogo() {
     animationFrame = requestAnimationFrame(animateLogo);
 }
 
-// Wake up triggers
 ['mousemove', 'touchstart', 'click', 'scroll'].forEach(evt => {
     document.addEventListener(evt, resetScreensaver);
 });
+
