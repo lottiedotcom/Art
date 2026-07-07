@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>My Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 2006 Login Screen -->
+    <div id="login-screen">
+        <div class="login-box">
+            <!-- Click this icon to see the password hint -->
+            <img src="flower.jpg" id="user-avatar" alt="User Avatar" title="Click for password hint">
+            <h2>User</h2>
+            <div class="input-group">
+                <input type="password" id="password-input" placeholder="Enter password">
+                <button id="login-btn">→</button>
+            </div>
+            <p id="login-error">Incorrect.</p>
+        </div>
+    </div>
+
+    <!-- Main Desktop Environment -->
+    <div id="desktop" class="hidden">
+        
+        <!-- Desktop Icons -->
+        <div class="icon" onclick="openWindow('window-circle')">
+            <div class="icon-img">📁</div>
+            <span>Project_Circle</span>
+        </div>
+        <div class="icon" onclick="openWindow('window-logs')">
+            <div class="icon-img">📝</div>
+            <span>System_Logs</span>
+        </div>
+        <div class="icon" onclick="openWindow('window-readme')">
+            <div class="icon-img">📄</div>
+            <span>ReadMe.txt</span>
+        </div>
+        <div class="icon" onclick="openWindow('window-about')">
+            <div class="icon-img">🌸</div>
+            <span>About</span>
+        </div>
+
+        <!-- Taskbar -->
+        <div id="taskbar">
+            <div id="start-btn">
+                <img src="YOUR_LOGO.png" alt="Start" id="start-logo">
+                <span>Start</span>
+            </div>
+            <div id="clock" onclick="openWindow('window-hidden')">12:00 PM</div>
+        </div>
+
+        <!-- Start Menu -->
+        <div id="start-menu" class="hidden">
+            <div class="start-sidebar"></div>
+            <div class="start-links">
+                <a href="YOUR_TOYHOUSE_LINK" target="_blank">🧸 Toyhouse</a>
+                <a href="YOUR_KOFI_LINK" target="_blank">☕ Ko-fi</a>
+                <a href="YOUR_X_LINK" target="_blank">✖ X</a>
+                <a href="YOUR_INSTA_LINK" target="_blank">📷 Instagram Art</a>
+            </div>
+        </div>
+
+        <!-- WINDOW: Project Circle (The Messy Gallery) -->
+        <div class="window hidden" id="window-circle">
+            <div class="title-bar">
+                <span>C:\Desktop\Project_Circle</span>
+                <button class="close-btn" onclick="closeWindow('window-circle')">X</button>
+            </div>
+            <div class="window-content messy-grid" id="gallery-grid">
+                <!-- JavaScript will inject the 50 images here -->
+            </div>
+        </div>
+
+        <!-- WINDOW: System Logs -->
+        <div class="window hidden" id="window-logs">
+            <div class="title-bar">
+                <span>System_Logs.txt</span>
+                <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
+            </div>
+            <div class="window-content text-file">
+                <p>Log 01: The subjects are contained.<br>
+                Log 02: They move when I am not looking.<br>
+                Log 03: I think one of them is missing.</p>
+            </div>
+        </div>
+
+        <!-- WINDOW: ReadMe -->
+        <div class="window hidden" id="window-readme">
+            <div class="title-bar">
+                <span>ReadMe.txt</span>
+                <button class="close-btn" onclick="closeWindow('window-readme')">X</button>
+            </div>
+            <div class="window-content text-file">
+                <p>Welcome to the system.<br><br>
+                Tap items to open them.<br>
+                Do not tap the glass.<br>
+                If you get lost, just wait.</p>
+            </div>
+        </div>
+
+        <!-- WINDOW: About -->
+        <div class="window hidden" id="window-about">
+            <div class="title-bar">
+                <span>About.exe</span>
+                <button class="close-btn" onclick="closeWindow('window-about')">X</button>
+            </div>
+            <div class="window-content cute-file">
+                <h2>Hi, I'm the Artist! 🎀</h2>
+                <p>This is my collection. I love creating cutecore and weirdcore art.</p>
+            </div>
+        </div>
+
+        <!-- WINDOW: Hidden Art -->
+        <div class="window hidden" id="window-hidden">
+            <div class="title-bar">
+                <span>C:\System32\Unknown</span>
+                <button class="close-btn" onclick="closeWindow('window-hidden')">X</button>
+            </div>
+            <div class="window-content text-file">
+                <p>You found it.</p>
+                <!-- Add your secret image tags here -->
+            </div>
+        </div>
+
+        <!-- WINDOW: Secondary Photo Viewer -->
+        <div class="window hidden" id="photo-viewer">
+            <div class="title-bar">
+                <span>Photo_Viewer.exe</span>
+                <button class="close-btn" onclick="closeWindow('photo-viewer')">X</button>
+            </div>
+            <div class="window-content center-content">
+                <img id="viewer-img" src="" alt="Selected Art">
+            </div>
+        </div>
+
+        <!-- Liminal Error Message -->
+        <div class="window hidden" id="error-message">
+            <div class="title-bar">
+                <span>Alert</span>
+                <button class="close-btn" onclick="closeWindow('error-message')">X</button>
+            </div>
+            <div class="window-content center-content error-text">
+                <p id="error-text">You have been here before.</p>
+                <button onclick="closeWindow('error-message')">OK</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Screensaver -->
+    <div id="screensaver" class="hidden">
+        <!-- Add your pixel stamp GIF here -->
+        <img src="YOUR_PIXEL_STAMP.gif" id="bounce-logo" alt="screensaver">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
