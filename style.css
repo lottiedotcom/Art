@@ -3,96 +3,127 @@
 body, html { width: 100vw; height: 100vh; overflow: hidden; background-color: #000; touch-action: manipulation; }
 .hidden { display: none !important; }
 
-/* 2006 Login Screen */
+/* Windows XP Login Screen */
 #login-screen {
     width: 100%; height: 100%;
-    background: linear-gradient(to bottom, #2b55b7, #4b7bd4);
+    background: #003399; /* XP Login Blue */
     display: flex; justify-content: center; align-items: center;
     color: white; z-index: 1000; position: absolute; top: 0; left: 0;
 }
-.login-box {
-    text-align: center; background: rgba(0,0,0,0.2); padding: 30px;
-    border-radius: 10px; border: 1px solid rgba(255,255,255,0.3); width: 85%; max-width: 350px;
+.login-divider {
+    position: absolute; top: 50%; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(to right, transparent, #fff, transparent);
+    transform: translateY(-50%); z-index: 1;
 }
-#user-avatar { width: 100px; height: 100px; border-radius: 10px; border: 3px solid white; cursor: pointer; margin-bottom: 15px; }
-.input-group { display: flex; justify-content: center; margin-top: 15px; gap: 5px; }
-#password-input { padding: 8px; border: none; border-radius: 3px; outline: none; width: 70%; }
-#login-btn { padding: 8px 15px; background: #4caf50; color: white; border: none; border-radius: 3px; font-weight: bold; }
-#login-error { color: #ffcccc; font-size: 12px; margin-top: 10px; opacity: 0; }
+.login-box {
+    display: flex; align-items: center; gap: 15px; z-index: 2;
+    background: #003399; padding: 20px; border-radius: 10px;
+}
+#user-avatar { width: 70px; height: 70px; border-radius: 8px; border: 2px solid white; cursor: pointer; }
+.login-info h2 { font-weight: normal; font-size: 24px; margin-bottom: 10px; text-shadow: 1px 1px 2px black; }
+.input-group { display: flex; gap: 5px; }
+#password-input { padding: 5px; border: 1px solid #ccc; border-radius: 3px; outline: none; width: 140px; }
+#login-btn { padding: 5px 10px; background: #3b8e39; color: white; border: 1px solid white; border-radius: 3px; font-weight: bold; cursor: pointer; }
+#login-error { color: #ff9999; font-size: 12px; margin-top: 5px; opacity: 0; }
 
 /* Desktop Environment */
 #desktop {
     width: 100%; height: 100%;
     background: url('YOUR_DESKTOP_WALLPAPER.jpg') no-repeat center center;
-    background-size: cover; position: relative; padding: 10px; display: flex; flex-direction: column; gap: 15px;
+    background-size: cover; position: relative; display: flex; flex-direction: column;
 }
 
 /* Desktop Icons */
-.icon {
-    width: 70px; text-align: center; color: white; text-shadow: 1px 1px 2px black; cursor: pointer;
-}
-.icon-img { font-size: 35px; margin-bottom: 5px; }
-.icon span { font-size: 12px; background: rgba(0,0,50,0.5); padding: 2px 4px; border-radius: 3px; }
+.desktop-icons-container { padding: 10px; display: flex; flex-direction: column; gap: 15px; flex-wrap: wrap; height: 90%; }
+.icon { width: 70px; text-align: center; color: white; text-shadow: 1px 1px 2px black; cursor: pointer; }
+.icon-img { width: 32px; height: 32px; margin-bottom: 3px; }
+.icon span { font-size: 11px; background: transparent; padding: 2px; border-radius: 3px; display: inline-block; line-height: 1.2; }
+.icon:active span { background: #316ac5; }
 
-/* Taskbar */
+/* XP Taskbar */
 #taskbar {
-    position: absolute; bottom: 0; left: 0; width: 100%; height: 40px;
-    background: linear-gradient(to bottom, #245edb, #0c3383);
+    position: absolute; bottom: 0; left: 0; width: 100%; height: 35px;
+    background: linear-gradient(to bottom, #245edb 0%, #3f8cf3 9%, #245edb 18%, #245edb 92%, #333 100%);
     display: flex; justify-content: space-between; align-items: center; z-index: 500;
 }
 #start-btn {
-    height: 100%; display: flex; align-items: center; padding: 0 10px; color: white; font-weight: bold; font-style: italic;
-    background: linear-gradient(to bottom, #499131, #2b6118); cursor: pointer; border-right: 1px solid #1a3c0e; border-top-right-radius: 8px;
+    height: 100%; display: flex; align-items: center; padding: 0 15px 0 10px; color: white; 
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-style: italic; font-size: 18px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    background: linear-gradient(to bottom, #3b8e39 0%, #46aa45 50%, #3b8e39 100%); 
+    cursor: pointer; border-right: 1px solid #1a3c0e; border-radius: 0 10px 10px 0;
+    box-shadow: inset 1px 1px 3px rgba(255,255,255,0.4);
 }
-#start-logo { height: 20px; margin-right: 5px; }
+#start-logo { height: 20px; margin-right: 5px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); }
 #clock {
-    color: white; padding: 0 15px; font-size: 13px; height: 100%; display: flex; align-items: center;
-    background: #0f83cf; border-left: 1px solid #06456f; cursor: pointer;
+    color: white; padding: 0 15px; font-size: 12px; height: 100%; display: flex; align-items: center;
+    background: #0f83cf; border-left: 1px solid #06456f; cursor: pointer; box-shadow: inset 1px 1px 2px rgba(0,0,0,0.3);
 }
 
-/* Start Menu */
+/* XP Start Menu */
 #start-menu {
-    position: absolute; bottom: 40px; left: 0; width: 250px; background: white;
-    border-top-right-radius: 5px; border: 2px solid #245edb; display: flex; z-index: 501;
+    position: absolute; bottom: 35px; left: 0; width: 250px; background: white;
+    border-top-right-radius: 5px; border: 1px solid #245edb; display: flex; flex-direction: column; z-index: 501;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
-.start-sidebar { width: 30px; background: linear-gradient(to bottom, #245edb, #0c3383); }
-.start-links { flex: 1; padding: 10px; display: flex; flex-direction: column; }
-.start-links a { text-decoration: none; color: black; padding: 10px; font-size: 14px; border-bottom: 1px solid #eee; }
+.start-header {
+    background: linear-gradient(to bottom, #245edb, #003399); color: white; padding: 10px;
+    display: flex; align-items: center; gap: 10px; font-weight: bold; border-top-right-radius: 4px;
+}
+.start-header img { width: 40px; height: 40px; border-radius: 5px; border: 2px solid white; }
+.start-body { background: white; padding: 5px; }
+.start-links { display: flex; flex-direction: column; }
+.start-links a { text-decoration: none; color: #333; padding: 10px; font-size: 13px; display: block; }
+.start-links a:active { background: #316ac5; color: white; }
 
 /* Windows */
 .window {
     position: absolute; top: 5%; left: 5%; width: 90%; max-height: 80%; background: #ece9d8;
-    border: 2px solid #0055ea; border-radius: 5px 5px 0 0; display: flex; flex-direction: column; z-index: 100;
+    border: 3px solid #0055ea; border-radius: 8px 8px 0 0; display: flex; flex-direction: column; z-index: 100;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
 }
 .title-bar {
-    background: linear-gradient(to right, #0058e6, #3a93ff); color: white; font-weight: bold;
-    padding: 5px 10px; display: flex; justify-content: space-between; align-items: center; font-size: 14px;
+    background: linear-gradient(to bottom, #0058e6, #3a93ff 10%, #2881fa 50%, #0058e6); 
+    color: white; font-weight: bold; text-shadow: 1px 1px 1px black;
+    padding: 3px 5px 3px 10px; display: flex; justify-content: space-between; align-items: center; font-size: 13px;
+    border-radius: 5px 5px 0 0;
 }
-.close-btn { background: #e04343; color: white; border: 1px solid white; border-radius: 3px; padding: 0 5px; font-weight: bold; }
-.window-content { padding: 10px; overflow-y: auto; flex: 1; min-height: 200px; background: white; border: 2px inset #fff; }
+.close-btn { 
+    background: #e04343; color: white; border: 1px solid white; border-radius: 3px; 
+    padding: 2px 6px; font-weight: bold; box-shadow: inset 1px 1px 2px rgba(255,255,255,0.5); 
+}
+.window-content { padding: 10px; overflow-y: auto; flex: 1; min-height: 250px; background: white; border: 1px solid #aaa; margin: 2px; }
+.no-padding { padding: 0; }
+
+/* Interactive Notepad Area */
+.notepad-area {
+    width: 100%; height: 100%; border: none; outline: none; resize: none;
+    font-family: 'Lucida Console', Courier, monospace; font-size: 14px; padding: 10px;
+}
 
 /* Gallery Messy Grid */
-.messy-grid { display: flex; flex-wrap: wrap; justify-content: space-around; background: white; }
+.messy-grid { display: flex; flex-wrap: wrap; justify-content: space-around; background: white; align-content: flex-start; }
 .gallery-item {
-    width: 60px; height: 60px; object-fit: cover; margin: 10px; cursor: pointer;
-    border: 1px solid #ccc; box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    width: 70px; height: 70px; object-fit: cover; margin: 15px 5px; cursor: pointer;
+    border: 1px solid #ccc; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
 
 /* Secondary Photo Viewer */
 #photo-viewer { top: 10%; z-index: 200; height: auto; max-height: 80%; }
-.center-content { display: flex; justify-content: center; align-items: center; flex-direction: column; background: #333;}
-#viewer-img { max-width: 100%; max-height: 50vh; object-fit: contain; }
+.center-content { display: flex; justify-content: center; align-items: center; flex-direction: column; background: #eef3fa; }
+#viewer-img { max-width: 100%; max-height: 50vh; object-fit: contain; border: 1px solid #aaa; }
+
+/* XP Style Button for Error */
+.xp-button {
+    padding: 5px 20px; border: 1px solid #003c74; border-radius: 3px;
+    background: linear-gradient(to bottom, #f2f2f2, #ebebeb 50%, #dddddd 51%, #cfcfcf);
+    cursor: pointer; font-family: 'Tahoma', sans-serif; font-size: 12px;
+}
 
 /* Formatting specific files */
-.text-file { font-family: 'Courier New', Courier, monospace; font-size: 13px; color: #333; }
+.text-file { font-family: 'Lucida Console', Courier, monospace; font-size: 13px; color: #333; }
 .cute-file { font-family: 'Comic Sans MS', cursive, sans-serif; text-align: center; color: #d65a9a; background: #ffe6f2; }
-.error-text p { font-family: 'Courier New', Courier, monospace; font-size: 14px; color: black; margin-bottom: 15px; }
+.error-text p { font-family: 'Tahoma', sans-serif; font-size: 13px; color: black; margin-bottom: 20px; }
 
 /* Screensaver */
-#screensaver {
-    position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: black; z-index: 2000; overflow: hidden;
-}
+#screensaver { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 2000; overflow: hidden; }
 #bounce-logo { position: absolute; width: 80px; }
