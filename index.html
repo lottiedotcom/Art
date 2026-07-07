@@ -3,81 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>My Gallery</title>
+    <title>XP Gallery</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- 2006 Login Screen -->
     <div id="login-screen">
+        <div class="login-divider"></div>
         <div class="login-box">
-            <!-- Click this icon to see the password hint -->
-            <img src="flower.jpg" id="user-avatar" alt="User Avatar" title="Click for password hint">
-            <h2>User</h2>
-            <div class="input-group">
-                <input type="password" id="password-input" placeholder="Enter password">
-                <button id="login-btn">→</button>
+            <img src="YOUR_AVATAR_IMAGE.png" id="user-avatar" alt="User Avatar" title="Click for password hint">
+            <div class="login-info">
+                <h2>User</h2>
+                <div class="input-group">
+                    <input type="password" id="password-input" placeholder="Type your password">
+                    <button id="login-btn">➔</button>
+                </div>
+                <p id="login-error">Incorrect password.</p>
             </div>
-            <p id="login-error">Incorrect.</p>
         </div>
     </div>
 
-    <!-- Main Desktop Environment -->
     <div id="desktop" class="hidden">
         
-        <!-- Desktop Icons -->
-        <div class="icon" onclick="openWindow('window-circle')">
-            <div class="icon-img">📁</div>
-            <span>Project_Circle</span>
-        </div>
-        <div class="icon" onclick="openWindow('window-logs')">
-            <div class="icon-img">📝</div>
-            <span>System_Logs</span>
-        </div>
-        <div class="icon" onclick="openWindow('window-readme')">
-            <div class="icon-img">📄</div>
-            <span>ReadMe.txt</span>
-        </div>
-        <div class="icon" onclick="openWindow('window-about')">
-            <div class="icon-img">🌸</div>
-            <span>About</span>
+        <div class="desktop-icons-container">
+            <div class="icon" onclick="openWindow('window-circle')">
+                <img src="https://win98icons.alexmeub.com/icons/png/directory_open_file_mydocs-4.png" class="icon-img" alt="Folder">
+                <span>Project_Circle</span>
+            </div>
+            <div class="icon" onclick="openWindow('window-logs')">
+                <img src="https://win98icons.alexmeub.com/icons/png/notepad_file-0.png" class="icon-img" alt="Logs">
+                <span>System_Logs</span>
+            </div>
+            <div class="icon" onclick="openWindow('window-readme')">
+                <img src="https://win98icons.alexmeub.com/icons/png/help_book_big-0.png" class="icon-img" alt="ReadMe">
+                <span>ReadMe.txt</span>
+            </div>
+            <div class="icon" onclick="openWindow('window-about')">
+                <img src="https://win98icons.alexmeub.com/icons/png/heart-0.png" class="icon-img" alt="About">
+                <span>About</span>
+            </div>
+            <div class="icon" onclick="openWindow('window-notepad')">
+                <img src="https://win98icons.alexmeub.com/icons/png/notepad-1.png" class="icon-img" alt="Notepad">
+                <span>Notepad</span>
+            </div>
         </div>
 
-        <!-- Taskbar -->
         <div id="taskbar">
             <div id="start-btn">
-                <img src="YOUR_LOGO.png" alt="Start" id="start-logo">
-                <span>Start</span>
+                <img src="https://win98icons.alexmeub.com/icons/png/windows_slanted-1.png" alt="Start" id="start-logo">
+                <span>start</span>
             </div>
             <div id="clock" onclick="openWindow('window-hidden')">12:00 PM</div>
         </div>
 
-        <!-- Start Menu -->
         <div id="start-menu" class="hidden">
-            <div class="start-sidebar"></div>
-            <div class="start-links">
-                <a href="YOUR_TOYHOUSE_LINK" target="_blank">🧸 Toyhouse</a>
-                <a href="YOUR_KOFI_LINK" target="_blank">☕ Ko-fi</a>
-                <a href="YOUR_X_LINK" target="_blank">✖ X</a>
-                <a href="YOUR_INSTA_LINK" target="_blank">📷 Instagram Art</a>
+            <div class="start-header">
+                <img src="YOUR_AVATAR_IMAGE.png" alt="User">
+                <span>User</span>
+            </div>
+            <div class="start-body">
+                <div class="start-links">
+                    <a href="YOUR_TOYHOUSE_LINK" target="_blank">🧸 Toyhouse</a>
+                    <a href="YOUR_KOFI_LINK" target="_blank">☕ Ko-fi</a>
+                    <a href="YOUR_X_LINK" target="_blank">✖ X</a>
+                    <a href="YOUR_INSTA_LINK" target="_blank">📷 Instagram Art</a>
+                </div>
             </div>
         </div>
 
-        <!-- WINDOW: Project Circle (The Messy Gallery) -->
         <div class="window hidden" id="window-circle">
             <div class="title-bar">
-                <span>C:\Desktop\Project_Circle</span>
+                <span>Project_Circle</span>
                 <button class="close-btn" onclick="closeWindow('window-circle')">X</button>
             </div>
             <div class="window-content messy-grid" id="gallery-grid">
-                <!-- JavaScript will inject the 50 images here -->
-            </div>
+                </div>
         </div>
 
-        <!-- WINDOW: System Logs -->
         <div class="window hidden" id="window-logs">
             <div class="title-bar">
-                <span>System_Logs.txt</span>
+                <span>System_Logs.txt - Notepad</span>
                 <button class="close-btn" onclick="closeWindow('window-logs')">X</button>
             </div>
             <div class="window-content text-file">
@@ -87,10 +92,9 @@
             </div>
         </div>
 
-        <!-- WINDOW: ReadMe -->
         <div class="window hidden" id="window-readme">
             <div class="title-bar">
-                <span>ReadMe.txt</span>
+                <span>ReadMe.txt - Notepad</span>
                 <button class="close-btn" onclick="closeWindow('window-readme')">X</button>
             </div>
             <div class="window-content text-file">
@@ -101,10 +105,9 @@
             </div>
         </div>
 
-        <!-- WINDOW: About -->
         <div class="window hidden" id="window-about">
             <div class="title-bar">
-                <span>About.exe</span>
+                <span>About</span>
                 <button class="close-btn" onclick="closeWindow('window-about')">X</button>
             </div>
             <div class="window-content cute-file">
@@ -113,7 +116,16 @@
             </div>
         </div>
 
-        <!-- WINDOW: Hidden Art -->
+        <div class="window hidden" id="window-notepad">
+            <div class="title-bar">
+                <span>Untitled - Notepad</span>
+                <button class="close-btn" onclick="closeWindow('window-notepad')">X</button>
+            </div>
+            <div class="window-content no-padding">
+                <textarea class="notepad-area" placeholder="Type here..."></textarea>
+            </div>
+        </div>
+
         <div class="window hidden" id="window-hidden">
             <div class="title-bar">
                 <span>C:\System32\Unknown</span>
@@ -121,14 +133,12 @@
             </div>
             <div class="window-content text-file">
                 <p>You found it.</p>
-                <!-- Add your secret image tags here -->
-            </div>
+                </div>
         </div>
 
-        <!-- WINDOW: Secondary Photo Viewer -->
         <div class="window hidden" id="photo-viewer">
             <div class="title-bar">
-                <span>Photo_Viewer.exe</span>
+                <span>Windows Picture and Fax Viewer</span>
                 <button class="close-btn" onclick="closeWindow('photo-viewer')">X</button>
             </div>
             <div class="window-content center-content">
@@ -136,7 +146,6 @@
             </div>
         </div>
 
-        <!-- Liminal Error Message -->
         <div class="window hidden" id="error-message">
             <div class="title-bar">
                 <span>Alert</span>
@@ -144,15 +153,13 @@
             </div>
             <div class="window-content center-content error-text">
                 <p id="error-text">You have been here before.</p>
-                <button onclick="closeWindow('error-message')">OK</button>
+                <button class="xp-button" onclick="closeWindow('error-message')">OK</button>
             </div>
         </div>
 
     </div>
 
-    <!-- Screensaver -->
     <div id="screensaver" class="hidden">
-        <!-- Add your pixel stamp GIF here -->
         <img src="YOUR_PIXEL_STAMP.gif" id="bounce-logo" alt="screensaver">
     </div>
 
