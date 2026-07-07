@@ -17,6 +17,28 @@ const liminalMessages = [
     "Please stop tapping the glass."
 ];
 
+// --- SOUND EFFECT LOGIC ---
+const clickAudio = document.getElementById('ui-click-sound');
+
+// Play sound function
+function playClickSound() {
+    if (clickAudio) {
+        clickAudio.currentTime = 0; // Reset sound to start so rapid clicks overlap correctly
+        clickAudio.play().catch(e => {
+            // Browsers sometimes block audio before a user interacts with the page, this catches the silent error
+        });
+    }
+}
+
+// Global listener: If you click an icon, button, link, start menu, or gallery image, it plays the sound
+document.addEventListener('click', (e) => {
+    const isClickable = e.target.closest('.icon, button, a, #start-btn, #clock, #user-avatar, .gallery-item');
+    if (isClickable) {
+        playClickSound();
+    }
+});
+
+
 // --- LOGIN LOGIC ---
 const avatarBtn = document.getElementById('user-avatar');
 const passInput = document.getElementById('password-input');
@@ -190,4 +212,3 @@ function animateLogo() {
 ['mousemove', 'touchstart', 'click', 'scroll'].forEach(evt => {
     document.addEventListener(evt, resetScreensaver);
 });
-
