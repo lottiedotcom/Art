@@ -16,7 +16,7 @@ const galleryData = [
         title: "Circle 02",
         description: "A continuation of the series. I really love the colors in this one.",
         kofiLink: "YOUR_KOFI_LINK_HERE"
-    },
+    }
     
     // Just copy and paste that block format above for all 50 pieces!
 ];
