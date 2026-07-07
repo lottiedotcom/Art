@@ -1,4 +1,4 @@
-// --- CONFIGURATION ---
+// --- CONFIGURATION --
 const CORRECT_PASSWORD = "dream"; 
 const PASSWORD_HINT = "psst... the password is 'dream'";
 
