@@ -1,12 +1,10 @@
 // --- CONFIGURATION ---
-const CORRECT_PASSWORD = "dream"; // Set your cute password here
+const CORRECT_PASSWORD = "dream"; 
 const PASSWORD_HINT = "psst... the password is 'dream'";
 
-// Insert the URLs of your 50 art pieces inside this array
+// URLs of your 50 art pieces
 const galleryImages = [
-    "YOUR_IMAGE_1.jpg", 
-    "YOUR_IMAGE_2.jpg",
-    // ... add all 50 here. For testing, it will just duplicate a placeholder if array is empty.
+    // "image1.jpg", "image2.jpg", etc... Add your 50 pieces here
 ];
 
 // Liminal Error Messages
@@ -24,13 +22,15 @@ const avatarBtn = document.getElementById('user-avatar');
 const passInput = document.getElementById('password-input');
 const loginBtn = document.getElementById('login-btn');
 
+// Click icon for password hint
 avatarBtn.addEventListener('click', () => alert(PASSWORD_HINT));
 
+// Verify password
 loginBtn.addEventListener('click', () => {
     if(passInput.value.toLowerCase() === CORRECT_PASSWORD) {
         document.getElementById('login-screen').classList.add('hidden');
         document.getElementById('desktop').classList.remove('hidden');
-        resetScreensaver(); // start the timer once logged in
+        resetScreensaver(); 
     } else {
         document.getElementById('login-error').style.opacity = 1;
         passInput.value = "";
@@ -42,7 +42,15 @@ let clickCount = 0;
 let clickTimer = null;
 
 function openWindow(id) {
-    document.getElementById(id).classList.remove('hidden');
+    // Bring window to front
+    const win = document.getElementById(id);
+    win.classList.remove('hidden');
+    
+    // Simple z-index bump to make clicked windows appear on top
+    const allWindows = document.querySelectorAll('.window');
+    allWindows.forEach(w => w.style.zIndex = 100);
+    win.style.zIndex = 101;
+    
     trackClicks();
 }
 
@@ -54,15 +62,12 @@ function trackClicks() {
     clickCount++;
     clearTimeout(clickTimer);
     
-    // If user clicks 5 times within 2 seconds
     if(clickCount >= 5) {
         triggerLiminalError();
         clickCount = 0;
     }
     
-    clickTimer = setTimeout(() => {
-        clickCount = 0;
-    }, 2000);
+    clickTimer = setTimeout(() => { clickCount = 0; }, 2000);
 }
 
 function triggerLiminalError() {
@@ -72,12 +77,20 @@ function triggerLiminalError() {
     
     errorTxt.innerText = randomMsg;
     errorWin.classList.remove('hidden');
+    errorWin.style.zIndex = 999; // Ensure error is always on top
 }
 
 // --- START MENU ---
 document.getElementById('start-btn').addEventListener('click', () => {
     const menu = document.getElementById('start-menu');
     menu.classList.toggle('hidden');
+});
+
+// Hide start menu if clicking elsewhere
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('#start-btn') && !e.target.closest('#start-menu')) {
+        document.getElementById('start-menu').classList.add('hidden');
+    }
 });
 
 // --- GLITCHING CLOCK LOGIC ---
@@ -95,36 +108,29 @@ function updateClock() {
     return hours + ':' + minutes + ' ' + ampm;
 }
 
-// Every 1 second, check if we should glitch
 setInterval(() => {
-    // 10% chance to glitch every second (roughly once every 5-10 seconds)
+    // Roughly once every 5-10 seconds
     if(Math.random() < 0.1) {
         const randomGlitch = glitchTimes[Math.floor(Math.random() * glitchTimes.length)];
         clock.innerText = randomGlitch;
-        clock.style.color = "red"; 
         
-        // Snap back to real time after 1 second
         setTimeout(() => {
             clock.innerText = updateClock();
-            clock.style.color = "white";
         }, 1000);
     } else {
-        if(clock.style.color !== "red") {
-            clock.innerText = updateClock();
-        }
+        clock.innerText = updateClock();
     }
 }, 1000);
 
 // --- POPULATE THE MESSY GALLERY ---
 const grid = document.getElementById('gallery-grid');
-// If you don't have 50 URLs yet, this loop generates placeholders so you can see the layout
 for(let i = 0; i < 50; i++) {
     let img = document.createElement('img');
-    img.src = galleryImages[i] || 'https://via.placeholder.com/60/ccc/999?text=Art'; // fallback
+    img.src = galleryImages[i] || 'https://via.placeholder.com/70/ccc/999?text=Art'; // fallback
     img.className = 'gallery-item';
     
-    // Add some random rotation to make it look "messy"
-    let randomRot = Math.floor(Math.random() * 20) - 10; 
+    // Random rotation for the messy look
+    let randomRot = Math.floor(Math.random() * 30) - 15; 
     img.style.transform = `rotate(${randomRot}deg)`;
     
     img.onclick = () => {
@@ -139,7 +145,7 @@ let screensaverTimeout;
 const screensaver = document.getElementById('screensaver');
 const logo = document.getElementById('bounce-logo');
 
-let x = 0, y = 0, dx = 2, dy = 2; // Speed and position
+let x = 0, y = 0, dx = 2, dy = 2;
 let animationFrame;
 
 function resetScreensaver() {
@@ -167,8 +173,7 @@ function animateLogo() {
     animationFrame = requestAnimationFrame(animateLogo);
 }
 
-// Listeners to wake up from screensaver
+// Wake up triggers
 ['mousemove', 'touchstart', 'click', 'scroll'].forEach(evt => {
     document.addEventListener(evt, resetScreensaver);
 });
-
