@@ -93,9 +93,17 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// --- GLITCHING CLOCK LOGIC ---
+// --- GLITCHING CLOCK & SECRET CLICK LOGIC ---
 const clock = document.getElementById('clock');
 const glitchTimes = ["00:00 AM", "3:33 AM", "10:21 AM"];
+let isGlitching = false; // Tracks if the clock is currently in a glitch state
+
+// Only open the hidden window if they click while isGlitching is true
+clock.addEventListener('click', () => {
+    if (isGlitching) {
+        openWindow('window-hidden');
+    }
+});
 
 function updateClock() {
     const now = new Date();
@@ -109,16 +117,21 @@ function updateClock() {
 }
 
 setInterval(() => {
-    // Roughly once every 5-10 seconds
+    // 10% chance roughly once every 5-10 seconds
     if(Math.random() < 0.1) {
+        isGlitching = true; // The window of opportunity opens
         const randomGlitch = glitchTimes[Math.floor(Math.random() * glitchTimes.length)];
         clock.innerText = randomGlitch;
         
+        // Glitch lasts exactly 1 second before snapping back
         setTimeout(() => {
+            isGlitching = false; // The window closes
             clock.innerText = updateClock();
         }, 1000);
     } else {
-        clock.innerText = updateClock();
+        if (!isGlitching) {
+            clock.innerText = updateClock();
+        }
     }
 }, 1000);
 
@@ -177,3 +190,4 @@ function animateLogo() {
 ['mousemove', 'touchstart', 'click', 'scroll'].forEach(evt => {
     document.addEventListener(evt, resetScreensaver);
 });
+
