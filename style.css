@@ -136,6 +136,45 @@ body, html {
 .center-content { display: flex; justify-content: center; align-items: center; flex-direction: column; background: #eef3fa; }
 #viewer-img { max-width: 100%; max-height: 50vh; object-fit: contain; border: 1px solid #aaa; }
 
+/* Photo Viewer Details & Ko-fi Button */
+#viewer-details {
+    margin-top: 15px;
+    padding: 15px;
+    background: white;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.1);
+}
+#viewer-title {
+    font-size: 16px;
+    color: #003399;
+    margin-bottom: 5px;
+}
+#viewer-desc {
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+#viewer-kofi {
+    display: inline-block;
+    background: #29abe0; /* Classic Ko-fi Blue */
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+#viewer-kofi:active {
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.5);
+    transform: translateY(1px);
+}
+
 /* XP Style Button for Error */
 .xp-button {
     padding: 5px 20px; border: 1px solid #003c74; border-radius: 3px;
